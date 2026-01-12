@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Empório Burger | Taiúva</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#FF9F1C',
+                            dark: '#121212',
+                            gray: '#1E1E1E',
+                            light: '#F4F4F9'
+                        }
+                    },
+                    screens: {
+                        'xs': '375px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Barra de Rolagem Personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF9F1C; 
+        }
+
+        .hero-bg {
+            /* TROQUE A IMAGEM DE FUNDO DA TELA INICIAL AQUI: */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1586190848861-99c8a3bd7991?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        .texture-bg {
+            background-color: #121212;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
+        }
+
+        /* Efeito de Máscara Lateral (Fade) */
+        .side-fade-image {
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+        }
+        
+        @media (max-width: 768px) {
+            .side-fade-image {
+                -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+                mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-brand-orange selection:text-black overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 lg:px-12 flex justify-between items-center backdrop-blur-md bg-brand-dark/80 border-b border-white/5">
+        <a href="#" class="flex items-center gap-2 group">
+            <div class="bg-brand-orange p-2 rounded-lg text-black transform group-hover:rotate-12 transition-transform shadow-lg shadow-brand-orange/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                    <path d="M6 11c0-2.8 2-5 6-5s6 2.2 6 5" /> <path d="M5 11h14" /> <path d="M5 15h14" /> <path d="M6 19h12a2 2 0 0 0 2-2v-1H4v1a2 2 0 0 0 2 2Z" /> </svg>
+            </div>
+            <span class="font-display text-xl xs:text-2xl font-bold tracking-wide text-white">EMPÓRIO <span class="text-brand-orange">BURGER</span></span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#home" class="text-sm font-semibold hover:text-brand-orange transition-colors">INÍCIO</a>
+            <a href="#menu" class="text-sm font-semibold hover:text-brand-orange transition-colors">DESTAQUES</a>
+            <a href="#about" class="text-sm font-semibold hover:text-brand-orange transition-colors">SOBRE</a>
+            <a href="#location" class="text-sm font-semibold hover:text-brand-orange transition-colors">LOCALIZAÇÃO</a>
+            <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="bg-brand-orange text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-white transition-colors shadow-lg shadow-brand-orange/20 active:scale-95 transform duration-100">
+                PEDIR AGORA
+            </a>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-orange active:scale-90 transition-transform p-2">
+            <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 md:hidden backdrop-blur-xl">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-white hover:text-brand-orange p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#home" class="mobile-link text-3xl font-display font-bold hover:text-brand-orange transition-colors">INÍCIO</a>
+        <a href="#menu" class="mobile-link text-3xl font-display font-bold hover:text-brand-orange transition-colors">DESTAQUES</a>
+        <a href="#about" class="mobile-link text-3xl font-display font-bold hover:text-brand-orange transition-colors">SOBRE</a>
+        <a href="#location" class="mobile-link text-3xl font-display font-bold hover:text-brand-orange transition-colors">LOCALIZAÇÃO</a>
+        <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="text-xl font-bold text-black bg-brand-orange px-10 py-4 rounded-full hover:bg-white transition-colors shadow-lg shadow-brand-orange/20 mt-4 active:scale-95 transform duration-100">
+            FAZER PEDIDO
+        </a>
+    </div>
+
+    <a href="https://wa.me/5516992316461" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110 active:scale-90 flex items-center gap-2 whatsapp-pulse group touch-manipulation">
+        <i data-lucide="message-circle" class="w-7 h-7 md:w-6 md:h-6"></i>
+        <span class="font-bold hidden md:inline max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap">Fale Conosco</span>
+    </a>
+
+    <section id="home" class="hero-bg min-h-[100dvh] flex items-center relative py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent z-10"></div>
+        
+        <div class="container mx-auto px-6 relative z-20 w-full h-full flex flex-col md:flex-row items-center justify-between">
+            
+            <div class="max-w-4xl relative z-30 w-full md:w-3/5 pt-12 md:pt-0">
+                <span class="bg-brand-orange/20 text-brand-orange px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 inline-block border border-brand-orange/30 backdrop-blur-sm shadow-[0_0_15px_rgba(255,159,28,0.3)]">
+                    O Melhor de Taiúva
+                </span>
+                
+                <h1 class="font-display text-4xl xs:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mb-6 text-white drop-shadow-2xl relative">
+                    SUCULÊNCIA <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-yellow-500 relative z-10 filter drop-shadow-lg">MONSTRUOSA</span>
+                </h1>
+
+                <p class="text-gray-200 text-lg md:text-xl mb-8 max-w-lg font-light leading-relaxed drop-shadow-md">
+                    Blend de carnes selecionadas, muito queijo derretido e molhos secretos. A experiência definitiva em hambúrguer..
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="bg-brand-orange text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-white transition-all shadow-xl shadow-brand-orange/20 flex items-center justify-center gap-2 group active:scale-95 text-center whitespace-nowrap">
+                        <span>CARDÁPIO COMPLETO</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <button onclick="scrollToLocation()" class="px-8 py-4 rounded-lg font-bold text-lg border border-white/30 bg-black/20 backdrop-blur-sm hover:bg-white/10 transition-all text-white flex items-center justify-center gap-2 active:scale-95 text-center whitespace-nowrap">
+                        <span>COMO CHEGAR</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="absolute md:relative right-0 bottom-0 md:bottom-auto w-full md:w-2/5 h-[40vh] md:h-auto flex justify-end items-center pointer-events-none z-0 md:z-20 opacity-40 md:opacity-100">
+                <img src="assets/HambNacho.png" 
+                     alt="Hambúrguer Monstruoso" 
+                     class="side-fade-image object-cover md:object-contain h-full w-full transform translate-x-1/4 md:translate-x-0 scale-125 md:scale-110">
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block z-20">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-white/50"></i>
+        </div>
+    </section>
+
+    <div class="bg-brand-gray border-y border-white/5 py-10 md:py-8 relative z-20">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div class="flex flex-col md:flex-row items-center gap-4 justify-center md:justify-start">
+                <div class="bg-brand-dark p-3 rounded-full border border-white/10 text-brand-orange shadow-lg">
+                    <i data-lucide="flame" class="w-8 h-8 md:w-6 md:h-6"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl md:text-lg">Feito na Brasa</h3>
+                    <p class="text-sm text-gray-400">Sabor defumado autêntico</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-4 justify-center md:justify-start">
+                <div class="bg-brand-dark p-3 rounded-full border border-white/10 text-brand-orange shadow-lg">
+                    <i data-lucide="clock" class="w-8 h-8 md:w-6 md:h-6"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl md:text-lg">Entrega Rápida</h3>
+                    <p class="text-sm text-gray-400">Quentinho na sua porta</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-4 justify-center md:justify-start">
+                <div class="bg-brand-dark p-3 rounded-full border border-white/10 text-brand-orange shadow-lg">
+                    <i data-lucide="award" class="w-8 h-8 md:w-6 md:h-6"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl md:text-lg">Carne Premium</h3>
+                    <p class="text-sm text-gray-400">Hambúrguer de alta qualidade</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="menu" class="py-16 md:py-24 texture-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">NOSSOS <span class="text-brand-orange">CLÁSSICOS</span></h2>
+                <div class="h-1 w-24 bg-brand-orange mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto px-4">Uma prévia do que te espera. Acesse nosso cardápio digital para ver todas as opções.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="group bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-orange/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-orange/10 relative flex flex-col">
+                    <div class="absolute top-4 right-4 bg-brand-orange text-black font-bold text-xs px-3 py-1 rounded-full z-10 shadow-md">O GIGANTE</div>
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="assets/MonsterBurguer.png" alt="Burger Classico" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-gray to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12 flex-1 flex flex-col">
+                        <div class="flex justify-between items-end mb-2">
+                            <h3 class="font-display text-2xl font-bold">MONSTER BURGER</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed flex-1">
+                            Paõ de brioche, bacon, disco de queijo empanado, 3 hamburguer de 160g, molho da casa e queijo cheddar.
+                        </p>
+                        <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="w-full py-3 border border-brand-orange text-brand-orange font-bold rounded-lg hover:bg-brand-orange hover:text-black transition-colors flex items-center justify-center gap-2 active:scale-95 active:bg-brand-orange/10">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i> PEDIR AGORA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-orange/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-orange/10 flex flex-col">
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="assets/Pizza.png" alt="Burger Chicken" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-gray to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12 flex-1 flex flex-col">
+                        <div class="flex justify-between items-end mb-2">
+                            <h3 class="font-display text-2xl font-bold">RODÍZIO DE PIZZA</h3>
+                        </div>
+                      <p class="text-gray-400 text-sm mb-6 leading-relaxed flex-1">
+                            Quarta com sabor de quero mais: Dia de Rodízio!
+                        </p>
+                        <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="w-full py-3 border border-white/20 text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2 active:scale-95 active:bg-white/10">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i> PEDIR AGORA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group bg-brand-gray rounded-2xl overflow-hidden border border-white/5 hover:border-brand-orange/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-orange/10 relative flex flex-col">
+                     <div class="absolute top-4 right-4 bg-green-500 text-black font-bold text-xs px-3 py-1 rounded-full z-10 shadow-md">VEGETARIANO</div>
+                    <div class="h-56 md:h-64 overflow-hidden relative">
+                        <img src="assets/Vegetariano.png" alt="Burger Veggie" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-gray to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-12 flex-1 flex flex-col">
+                        <div class="flex justify-between items-end mb-2">
+                            <h3 class="font-display text-2xl font-bold">VEGETARIANO</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed flex-1">
+                            Pão de brioche, alface, cebola crispy, disco de queijo empanado, molho da casa, quejo cheddar e tomate.
+                        </p>
+                        <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="w-full py-3 border border-white/20 text-white font-bold rounded-lg hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2 active:scale-95 active:bg-white/10">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i> PEDIR AGORA
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://burgerhousetaiuva.menudino.com/" target="_blank" class="inline-flex items-center text-brand-orange hover:text-white font-bold transition-colors text-lg active:scale-95">
+                    Ver cardápio completo e fazer pedido <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="relative h-64 md:h-96 lg:h-auto order-1 lg:order-none">
+            <img src="https://images.unsplash.com/photo-1606131731446-5568d87113aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Chef cozinhando" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-brand-orange/20 mix-blend-multiply"></div>
+        </div>
+        <div class="bg-brand-gray p-8 md:p-12 lg:p-24 flex flex-col justify-center order-2 lg:order-none">
+            <i data-lucide="quote" class="text-brand-orange w-10 h-10 md:w-12 md:h-12 mb-4 md:mb-6 opacity-50"></i>
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">NÃO É SÓ COMIDA.<br>É UMA OBSESSÃO.</h2>
+            <p class="text-gray-400 mb-6 leading-relaxed text-sm md:text-base">
+               Temos o orgulho de ser os pioneiros e trazer para Taiúva a verdadeira obsessão pelo hambúrguer.
+        </div>
+    </section>
+
+    <section id="location" class="py-16 md:py-24 bg-brand-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="bg-brand-gray rounded-3xl p-6 md:p-12 border border-white/5 shadow-2xl flex flex-col lg:flex-row gap-8 lg:gap-12">
+                
+                <div class="flex-1 space-y-8 order-2 lg:order-1">
+                    <div>
+                        <h2 class="font-display text-3xl font-bold mb-2">VENHA NOS VISITAR</h2>
+                        <p class="text-gray-400">O sabor de verdade está aqui.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-brand-dark p-3 rounded-lg border border-white/10 text-brand-orange shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Endereço</h4>
+                                <p class="text-gray-400 text-sm md:text-base">Rua Praça 9 de Julho, 54<br>Centro - Taiúva, SP</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-brand-dark p-3 rounded-lg border border-white/10 text-brand-orange shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div class="w-full">
+                                <h4 class="font-bold text-white">Horário de Funcionamento</h4>
+                                <ul class="text-gray-400 text-sm space-y-2 mt-2 w-full max-w-xs">
+                                    <li class="flex justify-between items-center border-b border-white/5 pb-1 gap-4">
+                                        <span class="shrink-0">Terça e Quarta:</span> 
+                                        <span class="text-brand-orange font-medium">18:00 - 23:00</span>
+                                    </li>
+                                    <li class="flex justify-between items-center border-b border-white/5 pb-1 gap-4">
+                                        <span class="shrink-0">Sexta a Domingo:</span> 
+                                        <span class="text-brand-orange font-medium">18:00 - 23:30</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <a href="https://wa.me/5516992316461" target="_blank" class="bg-brand-dark p-3 rounded-lg border border-white/10 text-brand-orange shrink-0 hover:bg-green-600 hover:text-white hover:border-green-600 transition-all cursor-pointer shadow-lg hover:shadow-green-500/20 active:scale-95">
+                                <i data-lucide="phone" class="w-6 h-6"></i>
+                            </a>
+                            <div>
+                                <h4 class="font-bold text-white">Contato / WhatsApp</h4>
+                                <a href="https://wa.me/5516992316461" target="_blank" class="inline-flex items-center gap-2 mt-1 text-gray-400 hover:text-green-500 transition-colors group">
+                                    <span class="group-hover:underline">(16) 99231-6461</span>
+                                    <i data-lucide="external-link" class="w-4 h-4 opacity-50 group-hover:opacity-100"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-1 h-64 lg:h-80 rounded-2xl overflow-hidden relative group order-1 lg:order-2">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interior do Restaurante" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition-all">
+                        <a href="https://www.google.com/maps/place/Empório+Burger+-+Taiúva+%7C+SP/@-21.1242067,-48.4559624,17.25z/data=!4m6!3m5!1s0x94b95d9d061edead:0x182d00f6778d3d2b!8m2!3d-21.1242269!4d-48.4537118!16s%2Fg%2F11s8c12gd_?entry=ttu&g_ep=EgoyMDI2MDEwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="bg-white text-black px-6 py-2 rounded-full font-bold text-sm hover:bg-brand-orange transition-colors flex items-center gap-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 duration-300 active:scale-95 active:opacity-100 active:translate-y-0">
+                            <i data-lucide="navigation" class="w-4 h-4"></i> TRAÇAR ROTA
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/10 pb-24 md:pb-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-orange/10 p-2 rounded-lg text-brand-orange border border-brand-orange/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                            <path d="M6 11c0-2.8 2-5 6-5s6 2.2 6 5" />
+                            <path d="M5 11h14" />
+                            <path d="M5 15h14" />
+                            <path d="M6 19h12a2 2 0 0 0 2-2v-1H4v1a2 2 0 0 0 2 2Z" />
+                        </svg>
+                    </div>
+                    <span class="font-display text-xl font-bold text-white">EMPÓRIO <span class="text-brand-orange">BURGER</span></span>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="https://wa.me/5516992316461" target="_blank" class="text-gray-500 hover:text-green-500 transition-colors p-2"><i data-lucide="message-circle" class="w-6 h-6"></i></a>
+                    <a href="https://www.instagram.com/emporioburger_taiuva/" target="_blank" class="text-gray-500 hover:text-brand-orange transition-colors p-2"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                </div>
+
+                <p class="text-gray-600 text-sm">© 2024 Empório Burger. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializa ícones
+        lucide.createIcons();
+
+        // Lógica Menu Mobile
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isHidden = menu.classList.contains('translate-x-full');
+            if (isHidden) {
+                // Abrir
+                menu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; // Evita scroll do fundo
+            } else {
+                // Fechar
+                menu.classList.add('translate-x-full');
+                document.body.style.overflow = ''; // Restaura scroll
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        links.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Efeito Scroll Navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'bg-brand-dark/95', 'shadow-lg');
+                navbar.classList.remove('py-4', 'bg-brand-dark/80');
+            } else {
+                navbar.classList.remove('py-2', 'bg-brand-dark/95', 'shadow-lg');
+                navbar.classList.add('py-4', 'bg-brand-dark/80');
+            }
+        });
+
+        // Helper Scroll Suave
+        function scrollToLocation() {
+            document.getElementById('location').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
